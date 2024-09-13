@@ -20,7 +20,7 @@ public class Card {
     private String mobileNumber;
 
     @Column(name = "card_number")
-    private int cardNumber;
+    private String cardNumber;
 
     @Column(name = "card_type")
     private String cardType;

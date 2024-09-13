@@ -16,13 +16,13 @@ public class Customer extends BaseEntity {
     @Column(name = "customer_id")
     private Long customerId;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "mobile_number")
+    @Column(name = "mobile_number", nullable = false)
     private String mobileNumber;
 
 }
