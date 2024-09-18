@@ -165,7 +165,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9000/api/fetch?mobileNumber=4354437687",
+							"raw": "http://localhost:9000/api/fetch?mobileNumber=0123456789",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -178,7 +178,7 @@
 							"query": [
 								{
 									"key": "mobileNumber",
-									"value": "4354437687"
+									"value": "0123456789"
 								}
 							]
 						}
@@ -192,7 +192,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"mobileNumber\": \"4354437687\",\r\n    \"cardNumber\": \"100107091026\",\r\n    \"cardType\": \"Debit Card\",\r\n    \"totalLimit\": 100000,\r\n    \"amountUsed\": 10000,\r\n    \"availableAmount\": 90000\r\n}",
+							"raw": "{\r\n    \"mobileNumber\": \"0123456789\",\r\n    \"cardNumber\": \"100627554887\",\r\n    \"cardType\": \"Debit Card\",\r\n    \"totalLimit\": 100000,\r\n    \"amountUsed\": 10000,\r\n    \"availableAmount\": 90000\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -244,7 +244,115 @@
 		},
 		{
 			"name": "Loans",
-			"item": []
+			"item": [
+				{
+					"name": "POST Create Loan",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/create?mobileNumber=0123456789",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"create"
+							],
+							"query": [
+								{
+									"key": "mobileNumber",
+									"value": "0123456789"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET FetchLoanDetails",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/fetch?mobileNumber=4354437687",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"fetch"
+							],
+							"query": [
+								{
+									"key": "mobileNumber",
+									"value": "4354437687"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Update Loan Details",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobileNumber\": \"4354437687\",\n    \"loanNumber\": \"100593106808\",\n    \"loanType\": \"Vehicle Loan\",\n    \"totalLoan\": 30000,\n    \"amountPaid\": 10000,\n    \"outstandingAmount\": 20000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Loan Details",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/delete?mobileNumber=4354437687",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "mobileNumber",
+									"value": "4354437687"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
