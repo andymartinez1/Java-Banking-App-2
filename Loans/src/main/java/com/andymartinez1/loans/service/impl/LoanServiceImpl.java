@@ -22,9 +22,9 @@ public class LoanServiceImpl implements ILoanService {
 
     @Override
     public void createLoan(String mobileNumber) {
-        Optional<Loan> optionalLoans= loanRepository.findByMobileNumber(mobileNumber);
-        if(optionalLoans.isPresent()){
-            throw new LoanAlreadyExistsException("Loan already registered with given mobileNumber "+mobileNumber);
+        Optional<Loan> optionalLoans = loanRepository.findByMobileNumber(mobileNumber);
+        if (optionalLoans.isPresent()) {
+            throw new LoanAlreadyExistsException("Loan already registered with given mobileNumber " + mobileNumber);
         }
         loanRepository.save(createNewLoan(mobileNumber));
     }
@@ -55,7 +55,7 @@ public class LoanServiceImpl implements ILoanService {
                 () -> new ResourceNotFoundException("Loan", "LoanNumber", loanDTO.getLoanNumber()));
         LoanMapper.mapToLoan(loanDTO, loan);
         loanRepository.save(loan);
-        return  true;
+        return true;
     }
 
     @Override
