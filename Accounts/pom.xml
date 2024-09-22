@@ -94,6 +94,16 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <to>
+                        <image>andymartinez1/${project.artifactId}:v1</image>
+                    </to>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

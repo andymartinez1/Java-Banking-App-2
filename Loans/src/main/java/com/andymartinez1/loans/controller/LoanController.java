@@ -2,6 +2,7 @@ package com.andymartinez1.loans.controller;
 
 import com.andymartinez1.loans.constants.LoanConstants;
 import com.andymartinez1.loans.dto.ErrorResponseDTO;
+import com.andymartinez1.loans.dto.LoanContactInfoDTO;
 import com.andymartinez1.loans.dto.LoanDTO;
 import com.andymartinez1.loans.dto.ResponseDTO;
 import com.andymartinez1.loans.service.ILoanService;
@@ -13,7 +14,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,11 +29,23 @@ import org.springframework.web.bind.annotation.*;
 )
 @RestController
 @RequestMapping(path = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
-@AllArgsConstructor
 @Validated
 public class LoanController {
 
-    private ILoanService iLoanService;
+    private final ILoanService iLoanService;
+
+    public LoanController(ILoanService iLoanService) {
+        this.iLoanService = iLoanService;
+    }
+
+    @Value("${build.version}")
+    private String buildVersion;
+
+    @Autowired
+    private Environment environment;
+
+    @Autowired
+    private LoanContactInfoDTO loanContactInfoDTO;
 
     @Operation(
             summary = "Create Loan REST API",
@@ -158,6 +173,36 @@ public class LoanController {
                     .status(HttpStatus.EXPECTATION_FAILED)
                     .body(new ResponseDTO(LoanConstants.STATUS_417, LoanConstants.MESSAGE_417_DELETE));
         }
+    }
+
+    @Operation(summary = "Build information", description = "Build information deployed in accounts microservice")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "HTTP Status CREATED"),
+            @ApiResponse(responseCode = "500", description = "HTTP Status Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorResponseDTO.class)))
+    })
+    @GetMapping("/build-info")
+    public ResponseEntity<String> getBuildInfo() {
+        return ResponseEntity.status(HttpStatus.OK).body(buildVersion);
+    }
+
+    @Operation(summary = "Java Version", description = "Java version installed in accounts microservice")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "HTTP Status CREATED"),
+            @ApiResponse(responseCode = "500", description = "HTTP Status Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorResponseDTO.class)))
+    })
+    @GetMapping("/java-version")
+    public ResponseEntity<String> getJavaVersion() {
+        return ResponseEntity.status(HttpStatus.OK).body(environment.getProperty("JAVA_HOME"));
+    }
+
+    @Operation(summary = "Contact Information", description = "Contact info for accounts microservice")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "HTTP Status CREATED"),
+            @ApiResponse(responseCode = "500", description = "HTTP Status Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorResponseDTO.class)))
+    })
+    @GetMapping("/contact-info")
+    public ResponseEntity<LoanContactInfoDTO> getContactInfo() {
+        return ResponseEntity.status(HttpStatus.OK).body(loanContactInfoDTO);
     }
 
 }

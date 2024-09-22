@@ -1,0 +1,16 @@
+spring:
+  config:
+    activate:
+      on-profile: "qa"
+
+build:
+  version: "1.1.0"
+
+accounts:
+  message: "Welcome to Banking-App-2 accounts related QA APIs "
+  contactDetails:
+    name: "Kiwi - QA Lead"
+    email: "kiwi@test.com"
+  onCallSupport:
+    - (555) 555-5555
+    - (555) 543-5432
