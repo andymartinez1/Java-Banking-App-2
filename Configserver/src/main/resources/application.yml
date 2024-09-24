@@ -2,12 +2,19 @@ spring:
   application:
     name: "configserver"
   profiles:
-    active: native
+    #active: native *Used for configserver without git*
+    active: git
   cloud:
     config:
       server:
-        native:
-          search-locations: "classpath:/config"
+        #native:
+          #search-locations: "classpath:/config"
+        git:
+          uri: "https://github.com/andymartinez1/Java-Banking-App-2-Config.git"
+          default-label: main
+          timeout: 5
+          clone-on-start: true
+          force-pull: true
 
 server:
   port: 8071
