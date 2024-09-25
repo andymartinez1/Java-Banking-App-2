@@ -16,5 +16,14 @@ spring:
           clone-on-start: true
           force-pull: true
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+encrypt:
+  key: "jnjkn45j2389iH8989FHJJ89y98yd89"
+
 server:
   port: 8071
