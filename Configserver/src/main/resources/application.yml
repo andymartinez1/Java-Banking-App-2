@@ -32,7 +32,7 @@ management:
         enabled: true
 
 encrypt:
-  key: "jnjkn45j2389iH8989FHJJ89y98yd89"
+  key: "jnjkn45j23wer289iH8ddgt989FHJJ89y98yd89"
 
 server:
   port: 8071
